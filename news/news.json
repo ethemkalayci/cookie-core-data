@@ -3,15 +3,15 @@
   {
     "imageUrl": "https://ethemkalayci.github.io/cookie-core-data/news/images/news1.jpg",
     "categorie": "Annonce",
-    "titre": "Bienvenue sur Cookie Core - TEST",
+    "titre": "TEST",
     "description": "Découvrez le nouveau launcher Minecraft développé par Cookies Studio.",
     "publicationDate": "2026-10-23",
     "url": "https://example.com/actualite-1"
   },
   {
     "imageUrl": "https://ethemkalayci.github.io/cookie-core-data/news/images/news2.jpg",
-    "categorie": "Mise à jour",
-    "titre": "Les actualités deviennent dynamiques",
+    "categorie": "Mise à TEST",
+    "titre": "TEST",
     "description": "Les annonces de Cookie Core pourront désormais être publiées sans modifier directement le code Java du launcher.",
     "publicationDate": "2026-10-22",
     "url": "https://example.com/actualite-2"
