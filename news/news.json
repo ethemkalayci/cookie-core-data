@@ -1,0 +1,19 @@
+
+[
+  {
+    "imageUrl": "/images/banners/news/news1.jpg",
+    "categorie": "Annonce",
+    "titre": "Bienvenue sur Cookie Core",
+    "description": "Découvrez le nouveau launcher Minecraft développé par Cookies Studio.",
+    "publicationDate": "2026-10-23",
+    "url": "https://example.com/actualite-1"
+  },
+  {
+    "imageUrl": "/images/banners/news/news2.jpg",
+    "categorie": "Mise à jour",
+    "titre": "Les actualités deviennent dynamiques",
+    "description": "Les annonces de Cookie Core pourront désormais être publiées sans modifier directement le code Java du launcher.",
+    "publicationDate": "2026-10-22",
+    "url": "https://example.com/actualite-2"
+  }
+]
