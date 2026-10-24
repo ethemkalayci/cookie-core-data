@@ -1,6 +1,7 @@
 
 [
   {
+    "id": 1,
     "imageUrl": "https://ethemkalayci.github.io/cookie-core-data/news/images/news1.jpg",
     "categorie": "Annonce",
     "titre": "TEST",
@@ -9,6 +10,7 @@
     "url": "https://example.com/actualite-1"
   },
   {
+    "id": 2,
     "imageUrl": "https://ethemkalayci.github.io/cookie-core-data/news/images/news20.jpg",
     "categorie": "Mise à TEST",
     "titre": "TEST",
