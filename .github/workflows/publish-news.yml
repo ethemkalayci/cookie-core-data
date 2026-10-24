@@ -1,5 +1,4 @@
 name: Publier une actualité
-
 on:
   workflow_dispatch:
     inputs:
@@ -10,39 +9,104 @@ on:
       description:
         type: string
         required: true
-        description: "Description d'une actualité"
+        description: "Description"
       categorie:
         type: choice
-        options:
-          - Annonce
-          - Mise à jour
-          - Maintenance
-          - Événement
+        options: [Annonce, Mise à jour, Maintenance, Événement]
         required: true
-        description: "Les différentes catégories qu'une actualité peut avoir"
+        description: "Catégorie"
       imageUrl:
         type: string
         required: false
-        description: "URL de l'image de couverture"
+        description: "URL HTTPS de l'image (facultative)"
       url:
         type: string
         required: true
-        description: "URL de l'article complet"
+        description: "URL HTTPS de l'article"
+      dry_run:
+        type: boolean
+        default: true
+        description: "Simulation sans commit ni push"
+
+concurrency:
+  group: publish-news
+  cancel-in-progress: false
+  queue: max
+permissions:
+  contents: write
+
 jobs:
   publish-news:
+    if: github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-
+    timeout-minutes: 10
+    env:
+      NEWS_TITRE: ${{ inputs.titre }}
+      NEWS_DESCRIPTION: ${{ inputs.description }}
+      NEWS_CATEGORIE: ${{ inputs.categorie }}
+      NEWS_IMAGE_URL: ${{ inputs.imageUrl }}
+      NEWS_URL: ${{ inputs.url }}
+      DRY_RUN: ${{ inputs.dry_run }}
+      TARGET_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
-      - name: Récupérer le dépôt
-        uses: actions/checkout@v4
-      - name: Préparer une actualité
-        run: python scripts/publish_news.py
-        env:
-          NEWS_TITRE: ${{ inputs.titre }}
-          NEWS_DESCRIPTION: ${{ inputs.description }}
-          NEWS_CATEGORIE: ${{ inputs.categorie }}
-          NEWS_IMAGE_URL: ${{ inputs.imageUrl }}
-          NEWS_URL: ${{ inputs.url }}
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Tester
+        run: python -m unittest discover -s tests -v
+      - name: Préparer et publier
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for attempt in 1 2 3; do
+            git fetch origin "$TARGET_BRANCH"
+            # Checkout dédié : abandonner seulement la tentative générée par ce job.
+            git reset --hard "origin/$TARGET_BRANCH"
+            if [[ "$DRY_RUN" == "true" ]]; then
+              python scripts/publish_news.py --dry-run
+              exit 0
+            fi
+            python scripts/publish_news.py
+            git add -- news/news.json news/counter.json
+            git diff --cached --quiet && exit 0
+            git commit -m "Publier une actualité"
+            if git push origin "HEAD:refs/heads/$TARGET_BRANCH"; then
+              exit 0
+            fi
+            # Recalculer les IDs sur les données fraîches, sans force push.
+          done
+          echo "::error::Push impossible après trois tentatives."
+          exit 1
+      - name: Préparer les fichiers publics
+        if: ${{ !inputs.dry_run }}
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -R news catalog _site/
+          rm -f _site/news/.publish-news.lock
+      - name: Charger le site
+        if: ${{ !inputs.dry_run }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: ${{ !inputs.dry_run }}
+    needs: publish-news
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Déployer GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
