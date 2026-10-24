@@ -100,12 +100,13 @@ print(f"Dernier ID enregistré : {last_id}")
 print(f"Prochain ID disponible : {next_id}")
 
 
-# 8. Informations de test
-titre = "Nouvelle actualité Cookie Core"
-description = "Ceci est une annonce de test."
-categorie = "Annonce"
-image_url = ""
-url = "https://example.com/actualite-3"
+# 8. Informations provenant du formulaire GitHub Actions
+titre = os.environ["NEWS_TITRE"].strip()
+description = os.environ["NEWS_DESCRIPTION"].strip()
+categorie = os.environ["NEWS_CATEGORIE"].strip()
+image_url = os.environ.get("NEWS_IMAGE_URL", "").strip()
+url = os.environ["NEWS_URL"].strip()
+
 
 
 # 9. Générer la date
