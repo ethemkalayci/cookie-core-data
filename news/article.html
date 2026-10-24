@@ -1,41 +1,206 @@
 <!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="referrer" content="no-referrer">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src https:; base-uri 'none'; form-action 'none'; object-src 'none'">
-    <meta name="color-scheme" content="dark">
-    <title>Actualité · Cookies Studio</title>
-    <link rel="stylesheet" href="article.css">
-    <script src="article.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-c00A0wjzusGAd01sCLxzOR77VndECnv2JfwNHs+Ai/U='; style-src 'sha256-2JdGycAWgkCuo9Ti2g2MLF5C3E8Ylhs4xX4ZaV18iXI='; connect-src 'self'; img-src 'self' https: data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta name="color-scheme" content="dark">
+  <title>Actualité · Cookies Studio</title>
+  <style>
+/* Cookie Core — adapted from the launcher's JavaFX design system. */
+:root {
+  color-scheme: dark;
+  --background: #13171F;
+  --sidebar: #1B1724;
+  --text: #F5F2FA;
+  --hover: #342447;
+  --accent: #7040B6;
+  --card: #171C26;
+  --border: #303544;
+  --muted: #A9AFBE;
+  --category: #B895FF;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--background);
+  color: var(--text);
+  font-synthesis: none;
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; line-height: 1.65; }
+[hidden] { display: none !important; }
+.sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 228px;
+  padding: 28px 18px;
+  background: var(--sidebar);
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.brand { display: flex; align-items: center; gap: 10px; font-size: 18px; font-weight: 750; letter-spacing: .02em; }
+.cookie-mark { font-size: 22px; }
+.sidebar-rule { height: 2px; background: var(--accent); }
+.sidebar-current { display: flex; gap: 12px; align-items: center; border-radius: 10px; padding: 12px 16px; background: var(--accent); font-size: 14px; font-weight: 700; }
+.news-icon { font-size: 20px; line-height: 1; }
+.studio-credit { margin-top: auto; color: var(--muted); font-size: 12px; padding: 0 12px; }
+.studio-credit strong { display: block; color: var(--text); font-size: 14px; }
+.page { margin-left: 228px; }
+.masthead { padding: 30px 48px; border-bottom: 1px solid var(--border); color: var(--text); font-size: 18px; }
+.masthead span { color: var(--muted); font-size: 13px; display: block; margin-top: 3px; }
+main { max-width: 1016px; margin: 48px auto 72px; padding: 0 48px; min-height: 58vh; }
+.eyebrow { color: var(--text); font-size: 17px; font-weight: 750; margin: 0 0 24px; text-transform: uppercase; letter-spacing: .025em; }
+#article, #status { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 36px; overflow: hidden; }
+.metadata { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; font-size: 13px; }
+#category { color: var(--category); font-weight: 700; }
+#date { color: #A9AFBE; }
+h1 { color: #fff; font-size: clamp(30px, 4vw, 48px); line-height: 1.2; font-weight: 700; letter-spacing: -.025em; margin: 18px 0 28px; overflow-wrap: anywhere; }
+#cover { display: block; width: 100%; max-height: 460px; object-fit: cover; border-radius: 10px; margin: 0 0 28px; background: var(--background); }
+.description { color: var(--muted); font-size: 17px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+.signature { border-top: 1px solid var(--border); margin: 32px 0 0; padding-top: 20px; font-size: 13px; color: var(--muted); }
+#status-detail { color: var(--muted); }
+footer { max-width: 1016px; margin: auto; padding: 24px 48px; display: flex; justify-content: space-between; gap: 20px; color: var(--muted); font-size: 12px; }
+button { font: inherit; font-size: 14px; font-weight: 700; color: var(--text); background: var(--accent); border: 1px solid transparent; border-radius: 10px; padding: 12px 24px; cursor: pointer; transition: background .15s; }
+button:hover { background: #8858D0; }
+button:active { background: #593095; }
+button:focus-visible { outline: 2px solid #B99AE9; outline-offset: 4px; }
+@media (max-width: 1000px) {
+  .sidebar { width: 200px; }
+  .brand { font-size: 16px; }
+  .page { margin-left: 200px; }
+  main { padding: 0 28px; }
+  .masthead, footer { padding: 24px 28px; }
+  #article, #status { padding: 28px; }
+}
+@media (max-width: 680px) {
+  .sidebar { position: static; width: 100%; padding: 18px 22px; flex-direction: row; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 2px solid var(--accent); }
+  .sidebar-rule, .studio-credit, .news-icon { display: none; }
+  .sidebar-current { padding: 6px 12px; font-size: 12px; border-radius: 7px; }
+  .brand { font-size: 14px; gap: 6px; }
+  .cookie-mark { font-size: 18px; }
+  .page { margin-left: 0; }
+  .masthead { padding: 22px; font-size: 17px; }
+  main { margin: 28px auto 40px; padding: 0 18px; }
+  .eyebrow { font-size: 14px; margin-bottom: 18px; }
+  #article, #status { padding: 24px 20px; }
+  h1 { font-size: 30px; }
+  .description { font-size: 16px; }
+  footer { padding: 20px 22px; flex-direction: column; gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { button { transition: none; } }
+
+.home-return { color: var(--muted); text-decoration: none; font-size: 13px; }
+.home-return:hover { color: var(--text); }
+.home-return:focus-visible { outline: 2px solid #B99AE9; outline-offset: 4px; }
+@media(max-width:680px) { .sidebar:has(.home-return) { flex-wrap: wrap; } .home-return { order: 3; width: 100%; } }
+</style>
 </head>
 <body>
-<aside class="sidebar" aria-label="Cookie Core">
+  <aside class="sidebar" aria-label="Cookie Core">
     <div class="brand"><span class="cookie-mark" aria-hidden="true">🍪</span> COOKIE CORE</div>
     <div class="sidebar-rule" aria-hidden="true"></div>
+    <a class="home-return" href="../">← Retour à l’accueil</a>
     <div class="sidebar-current"><span class="news-icon" aria-hidden="true">▤</span> Actualités</div>
     <div class="studio-credit"><strong>Cookies Studio</strong>Le journal de Cookie Core</div>
-</aside>
-<div class="page">
-    <header class="masthead">Les nouvelles du studio<span>Retrouvez les annonces et les mises à jour de Cookie Core.</span></header>
-    <main>
-        <p class="eyebrow">Actualités Cookies Studio</p>
-        <section id="status" role="status" aria-live="polite">
-            <h1 id="status-title">Chargement de l’annonce…</h1>
-            <p id="status-detail">Nous préparons votre lecture.</p>
-            <button id="retry" type="button" hidden>Réessayer</button>
-        </section>
-        <article id="article" hidden aria-labelledby="title">
-            <div class="metadata"><span id="category"></span><time id="date"></time></div>
-            <h1 id="title"></h1>
-            <img id="cover" hidden alt="" referrerpolicy="no-referrer">
-            <div id="description" class="description"></div>
-            <p class="signature">Une annonce de Cookies Studio.</p>
-        </article>
-        <noscript><p>Activez JavaScript pour lire cette annonce.</p></noscript>
-    </main>
-    <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
-</div>
+  </aside>
+  <div class="page">
+  <header class="masthead">Les nouvelles du studio<span>Retrouvez les annonces et les mises à jour de Cookie Core.</span></header>
+  <main>
+    <p class="eyebrow">Actualités Cookies Studio</p>
+    <section id="status" role="status" aria-live="polite">
+      <h1 id="status-title">Chargement de l’annonce…</h1>
+      <p id="status-detail">Nous préparons votre lecture.</p>
+      <button id="retry" type="button" hidden>Réessayer</button>
+    </section>
+    <article id="article" hidden aria-labelledby="title">
+      <div class="metadata"><span id="category"></span><time id="date"></time></div>
+      <h1 id="title"></h1>
+      <img id="cover" hidden alt="" referrerpolicy="no-referrer">
+      <div id="description" class="description"></div>
+      <p class="signature">Une annonce de Cookies Studio.</p>
+    </article>
+    <noscript><p>Activez JavaScript pour lire cette annonce.</p></noscript>
+  </main>
+  <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
+  </div>
+  <script>
+/* The JSON is untrusted content: render all editorial fields as plain text. */
+"use strict";
+(() => {
+  const el = id => document.getElementById(id);
+  function status(title, detail, retry = false) {
+    el("article").hidden = true;
+    el("status").hidden = false;
+    el("status-title").textContent = title;
+    el("status-detail").textContent = detail;
+    el("retry").hidden = !retry;
+  }
+  function displayDate(value) {
+    if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) throw new Error("date");
+    const date = new Date(value + "T12:00:00Z");
+    if (!Number.isFinite(date.getTime()) || date.toISOString().slice(0, 10) !== value) throw new Error("date");
+    return new Intl.DateTimeFormat("fr-BE", {dateStyle: "long", timeZone: "Europe/Brussels"}).format(date);
+  }
+  function imageURL(value) {
+    if (typeof value !== "string" || !value || /[\s\u0000-\u001f]/.test(value)) return null;
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" && !url.username && !url.password ? url.href : null;
+    } catch { return null; }
+  }
+  async function load() {
+    const ids = new URLSearchParams(window.location.search).getAll("id");
+    if (ids.length !== 1 || !/^[1-9]\d*$/.test(ids[0]) || !Number.isSafeInteger(Number(ids[0]))) {
+      status("Lien d’annonce invalide", "Le lien doit contenir un identifiant d’annonce valide.");
+      return;
+    }
+    status("Chargement de l’annonce…", "Nous préparons votre lecture.");
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 12000);
+    let items;
+    try {
+      const response = await fetch("./news.json", {signal: controller.signal, cache: "no-cache", credentials: "omit"});
+      if (!response.ok) throw new Error("http");
+      items = await response.json();
+    } catch {
+      status("Actualités indisponibles", "Impossible de charger les annonces. Vérifiez votre connexion et réessayez.", true);
+      return;
+    } finally { clearTimeout(timeout); }
+    if (!Array.isArray(items)) {
+      status("Données indisponibles", "Le fichier des annonces est illisible. Réessayez plus tard.", true);
+      return;
+    }
+    const matches = items.filter(item => item && Number.isSafeInteger(item.id) && item.id === Number(ids[0]));
+    if (!matches.length) {
+      status("Annonce introuvable", "Cette annonce n’existe pas ou n’est plus disponible.");
+      return;
+    }
+    const item = matches[0];
+    try {
+      if (matches.length !== 1 || ["titre", "description", "categorie"].some(key => typeof item[key] !== "string" || !item[key].trim())) throw new Error("fields");
+      const date = displayDate(item.publicationDate);
+      el("title").textContent = item.titre;
+      el("description").textContent = item.description;
+      el("category").textContent = item.categorie;
+      el("date").textContent = date;
+      el("date").dateTime = item.publicationDate;
+      document.title = item.titre + " · Cookies Studio";
+      const cover = el("cover");
+      cover.hidden = true;
+      cover.removeAttribute("src");
+      cover.onload = () => { cover.hidden = false; };
+      cover.onerror = () => { cover.hidden = true; cover.removeAttribute("src"); };
+      const src = imageURL(item.imageUrl);
+      if (src) cover.src = src;
+      el("status").hidden = true;
+      el("article").hidden = false;
+    } catch {
+      status("Annonce indisponible", "Le contenu de cette annonce est incomplet ou invalide.");
+    }
+  }
+  el("retry").addEventListener("click", load);
+  load();
+})();
+</script>
 </body>
 </html>
