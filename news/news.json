@@ -16,5 +16,14 @@
     "description": "Les annonces de Cookie Core pourront désormais être publiées sans modifier directement le code Java du launcher.",
     "publicationDate": "2026-10-22",
     "url": "https://example.com/actualite-2"
+  },
+  {
+    "titre": "Cookie Core — Test de publication dynamique",
+    "description": "Ceci est un test du formulaire de publication. Les accents fonctionnent : é, è, à, ç.",
+    "categorie": "Annonce",
+    "imageUrl": "https://ethemkalayci.github.io/cookie-core-data/news/images/news3.jpg",
+    "url": "https://ethemkalayci.github.io/cookie-core-data/",
+    "id": 3,
+    "publicationDate": "2026-10-24"
   }
 ]
