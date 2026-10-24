@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src https:; base-uri 'none'; form-action 'none'; object-src 'none'">
+    <meta name="color-scheme" content="dark">
+    <title>Actualité · Cookies Studio</title>
+    <link rel="stylesheet" href="article.css">
+    <script src="article.js" defer></script>
+</head>
+<body>
+<aside class="sidebar" aria-label="Cookie Core">
+    <div class="brand"><span class="cookie-mark" aria-hidden="true">🍪</span> COOKIE CORE</div>
+    <div class="sidebar-rule" aria-hidden="true"></div>
+    <div class="sidebar-current"><span class="news-icon" aria-hidden="true">▤</span> Actualités</div>
+    <div class="studio-credit"><strong>Cookies Studio</strong>Le journal de Cookie Core</div>
+</aside>
+<div class="page">
+    <header class="masthead">Les nouvelles du studio<span>Retrouvez les annonces et les mises à jour de Cookie Core.</span></header>
+    <main>
+        <p class="eyebrow">Actualités Cookies Studio</p>
+        <section id="status" role="status" aria-live="polite">
+            <h1 id="status-title">Chargement de l’annonce…</h1>
+            <p id="status-detail">Nous préparons votre lecture.</p>
+            <button id="retry" type="button" hidden>Réessayer</button>
+        </section>
+        <article id="article" hidden aria-labelledby="title">
+            <div class="metadata"><span id="category"></span><time id="date"></time></div>
+            <h1 id="title"></h1>
+            <img id="cover" hidden alt="" referrerpolicy="no-referrer">
+            <div id="description" class="description"></div>
+            <p class="signature">Une annonce de Cookies Studio.</p>
+        </article>
+        <noscript><p>Activez JavaScript pour lire cette annonce.</p></noscript>
+    </main>
+    <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
+</div>
+</body>
+</html>

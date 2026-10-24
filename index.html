@@ -1,10 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' https:; base-uri 'none'; form-action 'none'; object-src 'none'">
+    <meta name="color-scheme" content="dark">
+    <title>Cookie Core · Cookies Studio</title>
+    <link rel="stylesheet" href="news/article.css">
+    <link rel="stylesheet" href="news/home.css">
+    <script src="news/home.js" defer></script>
 </head>
 <body>
-
+<aside class="sidebar" aria-label="Cookie Core">
+    <div class="brand"><span class="cookie-mark" aria-hidden="true">🍪</span> COOKIE CORE</div>
+    <div class="sidebar-rule" aria-hidden="true"></div>
+    <nav aria-label="Navigation principale">
+        <a class="sidebar-current" href="./" aria-current="page"><span aria-hidden="true">⌂</span> Accueil</a>
+        <a class="sidebar-link" href="#actualites"><span aria-hidden="true">▤</span> Actualités</a>
+    </nav>
+    <div class="studio-credit"><strong>Cookies Studio</strong>Le journal de Cookie Core</div>
+</aside>
+<div class="page">
+    <header class="hero">
+        <p class="welcome">Bienvenue sur Cookie Core !</p>
+        <div class="hero-content">
+            <p class="hero-subtitle">L’UNIVERS COOKIES STUDIO</p>
+            <h1>Votre prochaine<br>aventure commence ici.</h1>
+            <p class="hero-description">Toute l’actualité de Cookie Core et des projets du studio.</p>
+            <a class="primary-link" href="#actualites">Découvrir les actualités</a>
+        </div>
+    </header>
+    <main id="actualites">
+        <div class="section-heading"><h2 class="eyebrow">Actualités Cookies Studio</h2><span>Les dernières nouvelles du studio</span></div>
+        <section id="news-status" role="status" aria-live="polite">
+            <p id="news-message">Chargement des actualités…</p>
+            <button id="news-retry" type="button" hidden>Réessayer</button>
+        </section>
+        <div id="news-grid" class="news-grid"></div>
+        <noscript><p>Activez JavaScript pour afficher les actualités.</p></noscript>
+    </main>
+    <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
+</div>
 </body>
 </html>
