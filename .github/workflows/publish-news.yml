@@ -1,0 +1,48 @@
+name: Publier une actualité
+
+on:
+  workflow_dispatch:
+    inputs:
+      titre:
+        type: string
+        required: true
+        description: "Titre de l'actualité"
+      description:
+        type: string
+        required: true
+        description: "Description d'une actualité"
+      categorie:
+        type: choice
+        options:
+          - Annonce
+          - Mise à jour
+          - Maintenance
+          - Événement
+        required: true
+        description: "Les différentes catégories qu'une actualité peut avoir"
+      imageUrl:
+        type: string
+        required: false
+        description: "URL de l'image de couverture"
+      url:
+        type: string
+        required: true
+        description: "URL de l'article complet"
+jobs:
+  publish-news:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Préparer une actualité
+        run: python scripts/publish_news.py
+        env:
+          NEWS_TITRE: ${{ inputs.titre }}
+          NEWS_DESCRIPTION: ${{ inputs.description }}
+          NEWS_CATEGORIE: ${{ inputs.categorie }}
+          NEWS_IMAGE_URL: ${{ inputs.imageUrl }}
+          NEWS_URL: ${{ inputs.url }}
