@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "MontDino",
+    "minecraftVersion": "1.21.1",
+    "modLoader": "NEOFORGE",
+    "loaderVersion": "21.1.265",
+    "imagePath": "https://ethemkalayci.github.io/cookie-core-data/images/test1.jpg",
+    "modpackVersion": "1.0.0"
+  }
+]
