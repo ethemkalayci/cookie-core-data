@@ -2,10 +2,10 @@
   {
     "id": 1,
     "name": "MontDino",
-    "minecraftVersion": "1.21.1",
-    "modLoader": "NEOFORGE",
-    "loaderVersion": "21.1.265",
-    "imagePath": "https://ethemkalayci.github.io/cookie-core-data/images/test1.jpg",
+    "minecraftVersion": "1.20.1",
+    "modLoader": "FORGE",
+    "loaderVersion": "47.4.28",
+    "imagePath": "https://ethemkalayci.github.io/cookie-core-data/images/instances.jpg",
     "modpackVersion": "1.0.0"
   }
 ]
