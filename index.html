@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5cHH3Y8yB6QlRTS8P6OKpCrYk5GcLujI86Iu7cZSDiU='; style-src 'sha256-2QER6TuyI/qQHh4DQw5pa2pC3AI5SzgwLgVqaR+3W38='; connect-src 'self'; img-src 'self' https: data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-5cHH3Y8yB6QlRTS8P6OKpCrYk5GcLujI86Iu7cZSDiU='; style-src 'sha256-DbTU+MhX5nQzhD3lY5VdALDUiAGvPtP6G6gNIK+xw9s='; connect-src 'self'; img-src 'self' https: data:; base-uri 'none'; form-action 'none'; object-src 'none'">
   <meta name="color-scheme" content="dark">
   <title>Cookie Core · Cookies Studio</title>
   <style>
@@ -135,6 +135,8 @@ main { max-width: 1300px; margin-top: 12px; min-height: 30vh; scroll-margin-top:
   .section-heading > span { display: block; margin-top: 8px; }
   .news-grid { grid-template-columns: 1fr; }
 }
+footer a { color: #C8A9FF; text-underline-offset: 3px; }
+footer a:focus-visible { outline: 2px solid #C8A9FF; outline-offset: 4px; }
 </style>
 </head>
 <body>
@@ -166,7 +168,7 @@ main { max-width: 1300px; margin-top: 12px; min-height: 30vh; scroll-margin-top:
       <div id="news-grid" class="news-grid"></div>
       <noscript><p>Activez JavaScript pour afficher les actualités.</p></noscript>
     </main>
-    <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
+    <footer>Cookies Studio <span>Cookie Core · Actualités officielles · <a href="privacy.html">Confidentialité</a></span></footer>
   </div>
   <script>
 "use strict";

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-c00A0wjzusGAd01sCLxzOR77VndECnv2JfwNHs+Ai/U='; style-src 'sha256-2JdGycAWgkCuo9Ti2g2MLF5C3E8Ylhs4xX4ZaV18iXI='; connect-src 'self'; img-src 'self' https: data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-c00A0wjzusGAd01sCLxzOR77VndECnv2JfwNHs+Ai/U='; style-src 'sha256-k7yAJ4Y9W8uAp99iK07D7AZwq4bvO2Dbq4s6VWZcTx8='; connect-src 'self'; img-src 'self' https: data:; base-uri 'none'; form-action 'none'; object-src 'none'">
   <meta name="color-scheme" content="dark">
   <title>Actualité · Cookies Studio</title>
   <style>
@@ -93,6 +93,8 @@ button:focus-visible { outline: 2px solid #B99AE9; outline-offset: 4px; }
 .home-return:hover { color: var(--text); }
 .home-return:focus-visible { outline: 2px solid #B99AE9; outline-offset: 4px; }
 @media(max-width:680px) { .sidebar:has(.home-return) { flex-wrap: wrap; } .home-return { order: 3; width: 100%; } }
+footer a { color: #C8A9FF; text-underline-offset: 3px; }
+footer a:focus-visible { outline: 2px solid #C8A9FF; outline-offset: 4px; }
 </style>
 </head>
 <body>
@@ -121,7 +123,7 @@ button:focus-visible { outline: 2px solid #B99AE9; outline-offset: 4px; }
     </article>
     <noscript><p>Activez JavaScript pour lire cette annonce.</p></noscript>
   </main>
-  <footer>Cookies Studio <span>Cookie Core · Actualités officielles</span></footer>
+  <footer>Cookies Studio <span>Cookie Core · Actualités officielles · <a href="../privacy.html">Confidentialité</a></span></footer>
   </div>
   <script>
 /* The JSON is untrusted content: render all editorial fields as plain text. */
